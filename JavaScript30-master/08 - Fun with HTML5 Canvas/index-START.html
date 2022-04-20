@@ -99,7 +99,7 @@
     <button class="wdt-decrease" onclick="sizeChange(1)">-</button>
     <button class="wdt-increase" onclick="sizeChange(2)">+</button>
 
-    <button id="save-img">Save Image</button>
+    <button id="save-img" onclick="saveImage()">Save Image</button>
   </div>
   <canvas id="draw" width="0" height="0"></canvas>
   <script>
@@ -120,7 +120,7 @@
     let lastX = 0;
     let lastY = 0;
     var clr = 'blue';
-    var size = 5;
+    var size = 10;
 
     function draw(e) {
       if (!isDrawing) return;
@@ -166,15 +166,25 @@
       if (e == 1) {
         ctx.lineWidth -= 1
         size = ctx.lineWidth
-        console.log(size);
-        document.querySelector('size').innerHTML = "Size: " + size;
+        // console.log(size);
+        document.getElementById('size').innerHTML = "Size: " + size;
       };
       if (e == 2) {
         ctx.lineWidth += 1
         size = ctx.lineWidth
-        console.log(size);
-        document.querySelector('size').innerHTML = "Size: " + size;
+        // console.log(size);
+        document.getElementById('size').innerHTML = "Size: " + size;
       };
+    }
+
+    function saveImage() {
+      console.log('saving img.....');
+      var dataURL = canvas.toDataURL();
+      var link = document.createElement('a');
+      link.href = dataURL;
+      let x = Math.ceil(Math.random() * (canvas.width - 200));
+      link.download = 'kaka' + x + '.png';
+      link.click();
     }
   </script>
 </body>
